@@ -1,0 +1,23 @@
+name: flutter_jalali_date_picker
+description: "A Jalali/Persian Date Picker with Format Date to Persian"
+version: 1.0.0
+homepage: "https://github.com/ARASHz4/flutter_jalali_date_picker"
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  intl: any
+  shamsi_date: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: any
+
+flutter:
+
