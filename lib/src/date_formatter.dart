@@ -1,6 +1,6 @@
+import 'package:flutter_jalali_date_picker/flutter_jalali_date_picker.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:shamsi_date/shamsi_date.dart';
 
 extension AppDate on DateTime {
   String dateToYMMMdPersian() {

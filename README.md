@@ -2,7 +2,9 @@
 
 [![pub package](https://img.shields.io/pub/v/signalr_socket.svg)](https://pub.dev/packages/flutter_jalali_date_picker)
 
-A Jalali/Persian Date Picker with Format Date to Persian for Android, iOS, macOS, Windows, Linux and Web
+A Jalali/Persian Date Time Picker with Format Date to Persian for Android, iOS, macOS, Windows, Linux and Web
+
+This project Based on https://pub.dev/packages/persian_datetime_picker
 
 ## Platform Support
 
@@ -17,17 +19,17 @@ A Jalali/Persian Date Picker with Format Date to Persian for Android, iOS, macOS
 
 ```yaml
 dependencies:
-  flutter_jalali_date_picker: ^1.0.0 #latest version
+  flutter_jalali_date_picker: ^2.0.0 #latest version
 ```
 
-This sample open DatePicker and return the selected DateTime
+This sample open DatePicker and return the selected Date
 
 ```dart
-DateTime? datePicked = await jalaliDatePicker(
+Jalali? picked = await showJalaliDatePicker(
   context,
-  initialDate: selectedDate ?? DateTime.now(),
-  firstDate: DateTime(2020),
-  lastDate: DateTime(2030),
+  initialDate: Jalali.now(),
+  firstDate: Jalali(1385, 8),
+  lastDate: Jalali(1450, 9),
 );
 ```
 
@@ -36,7 +38,7 @@ Format DateTime to Persian
 ```dart
 final date = DateTime.now();
 
-Text(date.dateToYMMMdPersian()),
-Text(date.dateToMMMdPersian()),
-Text(date.dateTimeToStringWithDayPersian()),
+date.dateToYMMMdPersian();
+date.dateToMMMdPersian();
+date.dateTimeToStringWithDayPersian();
 ```
