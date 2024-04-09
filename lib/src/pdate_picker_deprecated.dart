@@ -666,7 +666,7 @@ class PYearPicker extends StatefulWidget {
     required this.firstDate,
     required this.lastDate,
     this.dragStartBehavior = DragStartBehavior.start,
-  })  : assert(!firstDate.isAfter(lastDate));
+  }) : assert(!firstDate.isAfter(lastDate));
 
   /// The currently selected date.
   ///

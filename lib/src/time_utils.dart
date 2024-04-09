@@ -26,7 +26,9 @@ String formatTimeOfDay(TimeOfDay timeOfDay,
   }
 
   // Add AM/PM indicator.
-  buffer..write(' ')..write(_formatDayPeriod(timeOfDay));
+  buffer
+    ..write(' ')
+    ..write(_formatDayPeriod(timeOfDay));
   return '$buffer';
 }
 
@@ -59,7 +61,9 @@ String _formatTwoDigitZeroPad(int number) {
 @override
 String formatMinute(TimeOfDay timeOfDay) {
   final int minute = timeOfDay.minute;
-  return minute < 10 ? '۰${intl.NumberFormat('', 'fa').format(minute)}' : intl.NumberFormat('', 'fa').format(minute);
+  return minute < 10
+      ? '۰${intl.NumberFormat('', 'fa').format(minute)}'
+      : intl.NumberFormat('', 'fa').format(minute);
 }
 
 TimeOfDayFormat timeOfDayFormat({bool alwaysUse24HourFormat = false}) {

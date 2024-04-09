@@ -21,7 +21,6 @@ bool isSameDay(Jalali? dateA, Jalali? dateB) {
       dateA?.day == dateB?.day;
 }
 
-
 /// Returns true if the two [Jalali] objects have the same month, and
 /// year, or are both null.
 bool isSameMonth(Jalali dateA, Jalali dateB) {
@@ -208,7 +207,8 @@ String formatMediumDate(Jalali date) {
 }
 
 Jalali parseCompactDate(String inputString) {
-  List<int> split = inputString.split('/').map((e) => int.parse(toEnglishDigit(e))).toList();
+  List<int> split =
+      inputString.split('/').map((e) => int.parse(toEnglishDigit(e))).toList();
   return Jalali(split[0], split[1], split[2]);
 }
 
@@ -218,7 +218,9 @@ String toEnglishDigit(String number) {
   final englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   for (var i = 0; i < 10; i++) {
-    number = number.replaceAll(RegExp(persianNumbers[i]), englishNumbers[i]).replaceAll(RegExp(arabicNumbers[i]), englishNumbers[i]);
+    number = number
+        .replaceAll(RegExp(persianNumbers[i]), englishNumbers[i])
+        .replaceAll(RegExp(arabicNumbers[i]), englishNumbers[i]);
   }
 
   return number;
@@ -355,8 +357,8 @@ extension JalaliExt on Jalali {
 
     if (weekDay == 7) {
       return true;
-    }
-    else if (solarHolidays.contains("${_twoDigitsEn(month)}${_twoDigitsEn(day)}")) {
+    } else if (solarHolidays
+        .contains("${_twoDigitsEn(month)}${_twoDigitsEn(day)}")) {
       return true;
     }
 
@@ -369,5 +371,3 @@ extension DateTimeExt on DateTime {
     return Jalali.fromDateTime(this);
   }
 }
-
-

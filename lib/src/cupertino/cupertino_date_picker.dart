@@ -1644,12 +1644,16 @@ class _CupertinoDatePickerDateTimeState
 
     // Adds medium date column if the picker's mode is date and time.
     if (widget.mode == PCupertinoDatePickerMode.dateAndTime) {
-      if (StringsText.datePickerDateTimeOrder == DatePickerDateTimeOrder.time_dayPeriod_date || StringsText.datePickerDateTimeOrder == DatePickerDateTimeOrder.dayPeriod_time_date) {
+      if (StringsText.datePickerDateTimeOrder ==
+              DatePickerDateTimeOrder.time_dayPeriod_date ||
+          StringsText.datePickerDateTimeOrder ==
+              DatePickerDateTimeOrder.dayPeriod_time_date) {
         pickerBuilders.add(_buildMediumDatePicker);
         columnWidths.add(_getEstimatedColumnWidth(_PickerColumnType.date));
       } else {
         pickerBuilders.insert(0, _buildMediumDatePicker);
-        columnWidths.insert(0, _getEstimatedColumnWidth(_PickerColumnType.date));
+        columnWidths.insert(
+            0, _getEstimatedColumnWidth(_PickerColumnType.date));
       }
     }
 

@@ -236,7 +236,8 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
   }
 
   void _handleOk() {
-    if (_entryMode == PDatePickerEntryMode.input || _entryMode == DatePickerEntryMode.inputOnly) {
+    if (_entryMode == PDatePickerEntryMode.input ||
+        _entryMode == DatePickerEntryMode.inputOnly) {
       final FormState form = _formKey.currentState!;
       if (!form.validate()) {
         setState(() => _autoValidate = true);
@@ -276,7 +277,9 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       _selectedDate = date;
     });
 
-    if (widget.popOnSelectDate && (_entryMode == PDatePickerEntryMode.calendar || _entryMode == PDatePickerEntryMode.calendarOnly)) {
+    if (widget.popOnSelectDate &&
+        (_entryMode == PDatePickerEntryMode.calendar ||
+            _entryMode == PDatePickerEntryMode.calendarOnly)) {
       Navigator.pop(context, _selectedDate);
     }
   }
@@ -312,9 +315,8 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     final Orientation orientation = MediaQuery.of(context).orientation;
     final TextTheme textTheme = theme.textTheme;
 
-    final String dateText = _selectedDate != null
-        ? _selectedDate!.formatMediumDate()
-        : 'Date';
+    final String dateText =
+        _selectedDate != null ? _selectedDate!.formatMediumDate() : 'Date';
     final Color dateColor = colorScheme.brightness == Brightness.light
         ? colorScheme.onPrimary
         : colorScheme.onSurface;
@@ -337,7 +339,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       ],
     );
 
-    PCalendarDatePicker pCalendarDatePicker () {
+    PCalendarDatePicker pCalendarDatePicker() {
       return PCalendarDatePicker(
         key: _calendarPickerKey,
         initialDate: _selectedDate!,
@@ -450,7 +452,9 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
                   children: <Widget>[
                     header,
                     Expanded(child: picker),
-                    if (!widget.popOnSelectDate || _entryMode == PDatePickerEntryMode.input || _entryMode == PDatePickerEntryMode.inputOnly)
+                    if (!widget.popOnSelectDate ||
+                        _entryMode == PDatePickerEntryMode.input ||
+                        _entryMode == PDatePickerEntryMode.inputOnly)
                       actions,
                   ],
                 );
@@ -466,7 +470,9 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Expanded(child: picker),
-                          if (!widget.popOnSelectDate || _entryMode == PDatePickerEntryMode.input || _entryMode == PDatePickerEntryMode.inputOnly)
+                          if (!widget.popOnSelectDate ||
+                              _entryMode == PDatePickerEntryMode.input ||
+                              _entryMode == PDatePickerEntryMode.inputOnly)
                             actions,
                         ],
                       ),

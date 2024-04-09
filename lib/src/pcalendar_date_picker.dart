@@ -546,7 +546,8 @@ class _MonthPickerState extends State<_MonthPicker> {
   Widget build(BuildContext context) {
     final String previousTooltipText =
         'ماه قبل ${_previousMonthDate.formatMonthYear()}';
-    final String nextTooltipText = 'ماه بعد ${_nextMonthDate.formatMonthYear()}';
+    final String nextTooltipText =
+        'ماه بعد ${_nextMonthDate.formatMonthYear()}';
     final Color controlColor =
         Theme.of(context).colorScheme.onSurface.withOpacity(0.60);
 
@@ -689,8 +690,7 @@ class _DayPicker extends StatelessWidget {
             border: Border.all(color: todayColor, width: 1),
             shape: BoxShape.circle,
           );
-        }
-        else if (dayToBuild.isHoliday()) {
+        } else if (dayToBuild.isHoliday()) {
           dayColor = Colors.red;
         }
 
@@ -846,7 +846,7 @@ class _YearPicker extends StatefulWidget {
     required this.initialDate,
     required this.selectedDate,
     required this.onChanged,
-  })  : assert(!firstDate.isAfter(lastDate));
+  }) : assert(!firstDate.isAfter(lastDate));
 
   /// The current date.
   ///
@@ -947,7 +947,8 @@ class _YearPickerState extends State<_YearPicker> {
         child: Center(
           child: Semantics(
             selected: isSelected,
-            child: Text(intl.NumberFormat('', 'fa').format(year), style: itemStyle),
+            child: Text(intl.NumberFormat('', 'fa').format(year),
+                style: itemStyle),
           ),
         ),
       ),
@@ -959,7 +960,8 @@ class _YearPickerState extends State<_YearPicker> {
       );
     } else {
       yearItem = InkWell(
-        customBorder: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32))),
+        customBorder: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(32))),
         key: ValueKey<int>(year),
         onTap: () {
           widget.onChanged(

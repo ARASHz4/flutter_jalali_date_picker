@@ -166,8 +166,7 @@ class _InputDatePickerFormFieldState extends State<PInputDatePickerFormField> {
     if (date == null) {
       // TODO(darrenaustin): localize 'Invalid format.'
       return widget.errorFormatText ?? 'Invalid format.';
-    }
-    else if (!_isValidAcceptableDate(date)) {
+    } else if (!_isValidAcceptableDate(date)) {
       // TODO(darrenaustin): localize 'Out of range.'
       return widget.errorInvalidText ?? 'Out of range.';
     }
@@ -203,7 +202,9 @@ class _InputDatePickerFormFieldState extends State<PInputDatePickerFormField> {
       builder: (BuildContext context, Orientation orientation) {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          height: orientation == Orientation.portrait ? _inputPortraitHeight : _inputLandscapeHeight,
+          height: orientation == Orientation.portrait
+              ? _inputPortraitHeight
+              : _inputLandscapeHeight,
           child: Column(
             children: <Widget>[
               const Spacer(),

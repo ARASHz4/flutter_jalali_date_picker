@@ -110,25 +110,25 @@ Future<JalaliRange?> showJalaliDateRangePicker(
 }) async {
   if (initialDateRange != null) {
     assert(
-    !initialDateRange.start.isAfter(initialDateRange.end),
-    "initialDateRange's start date must not be after it's end date.",
+      !initialDateRange.start.isAfter(initialDateRange.end),
+      "initialDateRange's start date must not be after it's end date.",
     );
 
     assert(
-    !initialDateRange.start.isBefore(firstDate),
-    "initialDateRange's start date must be on or after firstDate $firstDate.",
+      !initialDateRange.start.isBefore(firstDate),
+      "initialDateRange's start date must be on or after firstDate $firstDate.",
     );
     assert(
-    !initialDateRange.end.isBefore(firstDate),
-    "initialDateRange's end date must be on or after firstDate $firstDate.",
+      !initialDateRange.end.isBefore(firstDate),
+      "initialDateRange's end date must be on or after firstDate $firstDate.",
     );
     assert(
-    !initialDateRange.start.isAfter(lastDate),
-    "initialDateRange's start date must be on or before lastDate $lastDate.",
+      !initialDateRange.start.isAfter(lastDate),
+      "initialDateRange's start date must be on or before lastDate $lastDate.",
     );
     assert(
-    !initialDateRange.end.isAfter(lastDate),
-    "initialDateRange's end date must be on or before lastDate $lastDate.",
+      !initialDateRange.end.isAfter(lastDate),
+      "initialDateRange's end date must be on or before lastDate $lastDate.",
     );
   }
 
@@ -460,11 +460,12 @@ class _CalendarRangePickerDialog extends StatelessWidget {
 
     final bool isDark = colorScheme.brightness == Brightness.dark;
     final Color primarySurfaceColor =
-    isDark ? colorScheme.surface : colorScheme.primary;
+        isDark ? colorScheme.surface : colorScheme.primary;
     final Color onPrimarySurfaceColor =
-    isDark ? colorScheme.onSurface : colorScheme.onPrimary;
+        isDark ? colorScheme.onSurface : colorScheme.onPrimary;
 
-    final Color headerDisabledForeground = onPrimarySurfaceColor.withOpacity(0.38);
+    final Color headerDisabledForeground =
+        onPrimarySurfaceColor.withOpacity(0.38);
     final String startDateText = utils.formatRangeStartDate(
         localizations, selectedStartDate, selectedEndDate);
     final String endDateText = utils.formatRangeEndDate(
@@ -479,9 +480,9 @@ class _CalendarRangePickerDialog extends StatelessWidget {
             ? onPrimarySurfaceColor
             : headerDisabledForeground);
     final TextStyle saveButtonStyle = textTheme.labelLarge!.apply(
-        color: onConfirm != null ? onPrimarySurfaceColor : headerDisabledForeground);
-
-
+        color: onConfirm != null
+            ? onPrimarySurfaceColor
+            : headerDisabledForeground);
 
     final IconButton entryModeIcon = IconButton(
       padding: EdgeInsets.zero,
@@ -514,12 +515,13 @@ class _CalendarRangePickerDialog extends StatelessWidget {
           ],
           bottom: PreferredSize(
             preferredSize: const Size(double.infinity, 64),
-            child: Row(children:[
-              SizedBox(
-                  width: MediaQuery.of(context).size.width < 360 ? 42 : 72),
-              Expanded(
-                child: Semantics(
-                  label: '$helpText $startDateText to $endDateText',
+            child: Row(
+              children: [
+                SizedBox(
+                    width: MediaQuery.of(context).size.width < 360 ? 42 : 72),
+                Expanded(
+                  child: Semantics(
+                    label: '$helpText $startDateText to $endDateText',
                     excludeSemantics: true,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -559,11 +561,12 @@ class _CalendarRangePickerDialog extends StatelessWidget {
                   ),
                 ),
                 if (showEntryModeIcon && orientation == Orientation.portrait)
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: entryModeIcon,
-                ),
-            ],),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: entryModeIcon,
+                  ),
+              ],
+            ),
           ),
           backgroundColor: primarySurfaceColor,
         ),

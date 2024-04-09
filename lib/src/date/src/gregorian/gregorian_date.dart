@@ -122,10 +122,10 @@ class Gregorian implements Date, Comparable<Gregorian> {
   /// year and month default to 1
   Gregorian(this.year,
       [this.month = 1,
-        this.day = 1,
-        this.hour = 0,
-        this.minute = 0,
-        this.second = 0]) {
+      this.day = 1,
+      this.hour = 0,
+      this.minute = 0,
+      this.second = 0]) {
     // should be between: Gregorian(560,3,20) and Gregorian(3798,12,31)
     if (year < 560 || year > 3798) {
       throw DateException('Gregorian date is out of computable range.');
