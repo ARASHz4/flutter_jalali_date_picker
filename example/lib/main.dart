@@ -38,7 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     const itemHeight = 40.0;
-    final itemWidth = (MediaQuery.of(context).size.width - (MediaQuery.of(context).padding.left + MediaQuery.of(context).padding.right)) / 2;
+    final itemWidth = (MediaQuery.of(context).size.width -
+            (MediaQuery.of(context).padding.left +
+                MediaQuery.of(context).padding.right)) /
+        2;
 
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () async {
               final picked = await showJalaliDatePicker(
                 context,
-                initialDate: Jalali.fromDateTime(selectedDate ?? DateTime.now()),
+                initialDate:
+                    Jalali.fromDateTime(selectedDate ?? DateTime.now()),
                 firstDate: Jalali(1385, 8),
                 lastDate: Jalali(1450, 9),
                 popOnSelectDate: false,
@@ -82,7 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => DatePickerScreen(
-                            initialDate: Jalali.fromDateTime(selectedDate ?? DateTime.now()),
+                            initialDate: Jalali.fromDateTime(
+                                selectedDate ?? DateTime.now()),
                             firstDate: Jalali(1385, 8),
                             lastDate: Jalali(1450, 9),
                           )));
@@ -126,7 +131,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             CupertinoButton(
                               child: const Text('تایید'),
                               onPressed: () {
-                                Navigator.of(context).pop(tempPickedDate ?? Jalali.now());
+                                Navigator.of(context)
+                                    .pop(tempPickedDate ?? Jalali.now());
                               },
                             ),
                           ],
@@ -138,7 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: PCupertinoDatePicker(
                             mode: PCupertinoDatePickerMode.date,
-                            initialDateTime: Jalali.fromDateTime(selectedDate ?? DateTime.now()),
+                            initialDateTime: Jalali.fromDateTime(
+                                selectedDate ?? DateTime.now()),
                             onDateTimeChanged: (Jalali dateTime) {
                               tempPickedDate = dateTime;
                             },
@@ -176,7 +183,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Directionality(
                     textDirection: TextDirection.rtl,
                     child: MediaQuery(
-                      data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                      data: MediaQuery.of(context)
+                          .copyWith(alwaysUse24HourFormat: true),
                       child: child!,
                     ),
                   );
@@ -217,7 +225,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             CupertinoButton(
                               child: const Text('تایید'),
                               onPressed: () {
-                                Navigator.of(context).pop(tempPickedDate ?? Jalali.now());
+                                Navigator.of(context)
+                                    .pop(tempPickedDate ?? Jalali.now());
                               },
                             ),
                           ],
@@ -229,7 +238,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: PCupertinoDatePicker(
                             mode: PCupertinoDatePickerMode.dateAndTime,
-                            initialDateTime: Jalali.fromDateTime(selectedDate ?? DateTime.now()),
+                            initialDateTime: Jalali.fromDateTime(
+                                selectedDate ?? DateTime.now()),
                             onDateTimeChanged: (Jalali dateTime) {
                               tempPickedDate = dateTime;
                             },
@@ -280,7 +290,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             CupertinoButton(
                               child: const Text('تایید'),
                               onPressed: () {
-                                Navigator.of(context).pop(tempPickedDate ?? Jalali.now());
+                                Navigator.of(context)
+                                    .pop(tempPickedDate ?? Jalali.now());
                               },
                             ),
                           ],
@@ -333,7 +344,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
               if (picked != null) {
                 setState(() {
-                  label = "${picked.start.toDateTime().dateToYMMMdPersian()} تا ${picked.end.toDateTime().dateToYMMMdPersian()}";
+                  label =
+                      "${picked.start.toDateTime().dateToYMMMdPersian()} تا ${picked.end.toDateTime().dateToYMMMdPersian()}";
                 });
               }
             },
@@ -381,7 +393,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
               if (picked != null) {
                 setState(() {
-                  label = "${picked.start.toDateTime().dateToYMMMdPersian()} تا ${picked.end.toDateTime().dateToYMMMdPersian()}";
+                  label =
+                      "${picked.start.toDateTime().dateToYMMMdPersian()} تا ${picked.end.toDateTime().dateToYMMMdPersian()}";
                 });
               }
             },

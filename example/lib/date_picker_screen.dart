@@ -4,7 +4,11 @@ import 'package:shamsi_date/shamsi_date.dart';
 
 @immutable
 class DatePickerScreen extends StatelessWidget {
-  DatePickerScreen({super.key, required this.initialDate, required this.firstDate, required this.lastDate});
+  DatePickerScreen(
+      {super.key,
+      required this.initialDate,
+      required this.firstDate,
+      required this.lastDate});
 
   final Jalali initialDate;
   final Jalali firstDate;
