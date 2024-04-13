@@ -1,19 +1,13 @@
-// Copyright 2018 - 2021, Amirreza Madani. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-library date_formatter;
-
-import 'date.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:shamsi_date/shamsi_date.dart';
 
 /// super class for Jalali and Gregorian Date formatter
-abstract class DateFormatter {
+class PersianDateFormatter {
   /// stored date
   final Date date;
 
   /// make a [DateFormatter] for a [Date] object
-  DateFormatter(this.date);
+  PersianDateFormatter(this.date);
 
   /// year number string whatever length it has
   ///
@@ -87,8 +81,25 @@ abstract class DateFormatter {
     return str.length == 1 ? '۰$str' : str;
   }
 
-  /// month name
-  String get mN;
+  static const List<String> _monthNames = [
+    'فروردین',
+    'اردیبهشت',
+    'خرداد',
+    'تیر',
+    'امرداد',
+    'شهریور',
+    'مهر',
+    'آبان',
+    'آذر',
+    'دی',
+    'بهمن',
+    'اسفند',
+  ];
+
+  /// Jalali month name
+  String get mN {
+    return _monthNames[date.month - 1];
+  }
 
   /// day number string whatever length it has
   String get d {
@@ -101,6 +112,19 @@ abstract class DateFormatter {
     return str.length == 1 ? '۰$str' : str;
   }
 
-  /// week day name
-  String get wN;
+  /// Jalali week day names
+  static const List<String> _weekDayNames = [
+    'شنبه',
+    'یکشنبه',
+    'دوشنبه',
+    'سه‌شنبه',
+    'چهارشنبه',
+    'پنج‌شنبه',
+    'آدینه',
+  ];
+
+  /// Jalali week day name
+  String get wN {
+    return _weekDayNames[date.weekDay - 1];
+  }
 }

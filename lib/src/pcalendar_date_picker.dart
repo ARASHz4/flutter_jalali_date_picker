@@ -4,11 +4,12 @@
 
 import 'dart:math' as math;
 
+import 'package:shamsi_date/shamsi_date.dart';
+
 import './pdate_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_jalali_date_picker/src/date/shamsi_date.dart';
 import 'package:intl/intl.dart' as intl;
 import 'pdate_picker_common.dart';
 import 'pdate_utils.dart' as utils;

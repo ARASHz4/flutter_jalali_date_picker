@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_jalali_date_picker/src/date/shamsi_date.dart';
+import 'package:flutter_jalali_date_picker/src/persian_date_formatter.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 import 'pdate_picker_common.dart';
 import 'package:intl/intl.dart' as intl;
 
@@ -191,19 +192,27 @@ String formatDecimal(int number) {
 }
 
 String formatYear(Jalali date) {
-  return date.formatter.yy;
+  final formatter = PersianDateFormatter(date);
+
+  return formatter.yy;
 }
 
 String formatMonthYear(Jalali date) {
-  return '${date.formatter.mN} ${date.formatter.yyyy}';
+  final formatter = PersianDateFormatter(date);
+
+  return '${formatter.mN} ${formatter.yyyy}';
 }
 
 String formatFullDate(Jalali date) {
-  return '${date.formatter.wN}, ${date.formatter.m} ${date.day}, ${date.year}';
+  final formatter = PersianDateFormatter(date);
+
+  return '${formatter.wN}, ${formatter.m} ${intl.NumberFormat('', 'fa').format(date.day)}, ${intl.NumberFormat('', 'fa').format(date.year)}';
 }
 
 String formatMediumDate(Jalali date) {
-  return '${date.formatter.wN}, ${date.formatter.m} ${date.day}';
+  final formatter = PersianDateFormatter(date);
+
+  return '${formatter.wN}, ${formatter.m} ${intl.NumberFormat('', 'fa').format(date.day)}';
 }
 
 Jalali parseCompactDate(String inputString) {
@@ -299,49 +308,50 @@ extension JalaliExt on Jalali {
 
   ///formats
   String datePickerMediumDate() {
+    final formatter = PersianDateFormatter(this);
     return '${shortDayName[weekDay - DateTime.monday]} '
         '${formatter.mN} '
         '${intl.NumberFormat('', 'fa').format(day).padRight(2)}';
   }
 
   String formatMediumDate() {
-    final f = formatter;
-    return '${shortDayName[weekDay - 1]} ${f.d} ${f.mN}';
+    final formatter = PersianDateFormatter(this);
+    return '${shortDayName[weekDay - 1]} ${formatter.d} ${formatter.mN}';
   }
 
   String formatFullDate() {
-    final f = formatter;
-    return '${f.wN} ${f.d} ${f.mN} ${f.yyyy}';
+    final formatter = PersianDateFormatter(this);
+    return '${formatter.wN} ${formatter.d} ${formatter.mN} ${formatter.yyyy}';
   }
 
   String toJalaliDateTime() {
-    final f = formatter;
-    return '${f.yyyy}-${f.mm}-${f.dd} ${_twoDigits(hour)}:${_twoDigits(minute)}:${_twoDigits(second)}';
+    final formatter = PersianDateFormatter(this);
+    return '${formatter.yyyy}-${formatter.mm}-${formatter.dd} ${_twoDigits(hour)}:${_twoDigits(minute)}:${_twoDigits(second)}';
   }
 
   String formatYear() {
-    final f = formatter;
-    return f.yyyy;
+    final formatter = PersianDateFormatter(this);
+    return formatter.yyyy;
   }
 
   String formatCompactDate() {
-    final f = formatter;
-    return '${f.yyyy}/${f.mm}/${f.dd}';
+    final formatter = PersianDateFormatter(this);
+    return '${formatter.yyyy}/${formatter.mm}/${formatter.dd}';
   }
 
   String formatShortDate() {
-    final f = formatter;
-    return '${f.dd} ${f.mN}  ,${f.yyyy}';
+    final formatter = PersianDateFormatter(this);
+    return '${formatter.dd} ${formatter.mN}  ,${formatter.yyyy}';
   }
 
   String formatMonthYear() {
-    final f = formatter;
-    return '${f.yyyy}/${f.mm}';
+    final formatter = PersianDateFormatter(this);
+    return '${formatter.yyyy}/${formatter.mm}';
   }
 
   String formatShortMonthDay() {
-    final f = formatter;
-    return '${f.dd} ${f.mN}';
+    final formatter = PersianDateFormatter(this);
+    return '${formatter.dd} ${formatter.mN}';
   }
 
   bool isHoliday() {

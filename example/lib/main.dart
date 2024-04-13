@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jalali_date_picker/flutter_jalali_date_picker.dart';
 import 'package:flutter_jalali_date_picker_example/date_picker_screen.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 initialDate: Jalali.fromDateTime(selectedDate ?? DateTime.now()),
                 firstDate: Jalali(1385, 8),
                 lastDate: Jalali(1450, 9),
-                popOnSelectDate: true
+                popOnSelectDate: false,
               );
 
               if (picked != null) {
@@ -108,10 +109,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 context: context,
                 builder: (context) {
                   Jalali? tempPickedDate;
+
                   return SizedBox(
                     height: 250,
                     child: Column(
-                      children: <Widget>[
+                      children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -135,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Expanded(
                           child: PCupertinoDatePicker(
-                            mode: PCupertinoDatePickerMode.dateAndTime,
+                            mode: PCupertinoDatePickerMode.date,
                             initialDateTime: Jalali.fromDateTime(selectedDate ?? DateTime.now()),
                             onDateTimeChanged: (Jalali dateTime) {
                               tempPickedDate = dateTime;
@@ -189,6 +191,70 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: const Text(
               "Time Picker Input Mode",
+              textAlign: TextAlign.center,
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              final picked = await showModalBottomSheet<Jalali>(
+                context: context,
+                builder: (context) {
+                  Jalali? tempPickedDate;
+
+                  return SizedBox(
+                    height: 250,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            CupertinoButton(
+                              child: const Text('لغو'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            CupertinoButton(
+                              child: const Text('تایید'),
+                              onPressed: () {
+                                Navigator.of(context).pop(tempPickedDate ?? Jalali.now());
+                              },
+                            ),
+                          ],
+                        ),
+                        const Divider(
+                          height: 0,
+                          thickness: 1,
+                        ),
+                        Expanded(
+                          child: PCupertinoDatePicker(
+                            mode: PCupertinoDatePickerMode.dateAndTime,
+                            initialDateTime: Jalali.fromDateTime(selectedDate ?? DateTime.now()),
+                            onDateTimeChanged: (Jalali dateTime) {
+                              tempPickedDate = dateTime;
+                            },
+                            use24hFormat: false,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+
+              if (picked != null) {
+                final pickedDateTime = picked.toDateTime();
+
+                if (pickedDateTime != selectedDate) {
+                  setState(() {
+                    selectedDate = pickedDateTime;
+                    label = pickedDateTime.dateTimeToStringPersian();
+                  });
+                }
+              }
+            },
+            child: const Text(
+              "Date & Time Picker Cupertino",
               textAlign: TextAlign.center,
             ),
           ),

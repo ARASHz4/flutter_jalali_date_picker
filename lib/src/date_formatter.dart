@@ -54,7 +54,15 @@ extension AppDate on DateTime {
     return "$day ${monthName ?? month}";
   }
 
-  String dateTimeToStringWithDayPersian() {
+  String timeToStringPersian() {
+    return intl.DateFormat('hh:mm a', 'fa').format(this);
+  }
+
+  String dateTimeToStringPersian() {
+    return "${dateToMMMdPersian()} ${timeToStringPersian()}";
+  }
+
+  String dateToStringWithDayPersian() {
     initializeDateFormatting();
 
     final now = DateTime.now();

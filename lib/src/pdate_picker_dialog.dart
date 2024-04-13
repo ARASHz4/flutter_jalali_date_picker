@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_jalali_date_picker/src/date/shamsi_date.dart';
-
+import 'package:shamsi_date/shamsi_date.dart';
 import 'pcalendar_date_picker.dart';
 import 'pdate_picker_common.dart';
 import 'pdate_picker_header.dart';
@@ -8,7 +7,7 @@ import 'pdate_utils.dart' as utils;
 import 'pinput_date_picker.dart';
 
 const Size _calendarPortraitDialogSize = Size(330.0, 518.0);
-const Size _calendarLandscapeDialogSize = Size(496.0, 346.0);
+const Size _calendarLandscapeDialogSize = Size(496.0, 388.0);
 const Size _inputPortraitDialogSize = Size(330.0, 270.0);
 const Size _inputLandscapeDialogSize = Size(496, 160.0);
 const Duration _dialogSizeAnimationDuration = Duration(milliseconds: 200);

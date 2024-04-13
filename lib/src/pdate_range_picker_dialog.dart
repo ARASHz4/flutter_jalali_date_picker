@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_jalali_date_picker/src/date/shamsi_date.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 import 'pcalendar_date_range_picker.dart';
 import 'pdate_picker_common.dart';
 import 'pdate_picker_header.dart';

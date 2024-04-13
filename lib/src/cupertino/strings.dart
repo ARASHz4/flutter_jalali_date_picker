@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_jalali_date_picker/flutter_jalali_date_picker.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:shamsi_date/shamsi_date.dart';
 
 class StringsText {
-  static String datePickerYear(int yearIndex) => yearIndex.toString();
+  static String datePickerYear(int yearIndex) => intl.NumberFormat('', 'fa').format(yearIndex);
 
   static String datePickerMonth(int monthIndex) =>
       JalaliDate.months[monthIndex - 1];

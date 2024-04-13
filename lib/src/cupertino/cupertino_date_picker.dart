@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_jalali_date_picker/flutter_jalali_date_picker.dart';
 import 'package:flutter_jalali_date_picker/src/cupertino/strings.dart';
-
+import 'package:shamsi_date/shamsi_date.dart';
 import 'picker.dart';
 
 // simulators with "Debug View Hierarchy".
@@ -252,7 +252,7 @@ class PCupertinoDatePicker extends StatelessWidget {
     this.minuteInterval = 1,
     this.use24hFormat = false,
     this.backgroundColor,
-  })  : initialDateTime = initialDateTime ?? Jalali.now(),
+  }) : initialDateTime = initialDateTime ?? Jalali.now(),
         assert(
           minuteInterval > 0 && 60 % minuteInterval == 0,
           'minute interval is not a positive integer factor of 60',
@@ -1198,6 +1198,7 @@ class _CupertinoDatePickerDateTimeState
   @override
   void initState() {
     super.initState();
+
     initialDateTime = widget.initialDateTime;
 
     // Initially each of the "physical" regions is mapped to the meridiem region
@@ -1383,7 +1384,7 @@ class _CupertinoDatePickerDateTimeState
     ).addDays(selectedDayFromInitial);
 
     // The end value of the range is exclusive, i.e. [rangeStart, rangeEnd).
-    final Jalali rangeEnd = rangeStart.add(hours: 1);
+    final Jalali rangeEnd = rangeStart;
 
     return (widget.minimumDate?.isBefore(rangeEnd) ?? true) &&
         !(widget.maximumDate?.isBefore(rangeStart) ?? false);
