@@ -375,9 +375,3 @@ extension JalaliExt on Jalali {
     return false;
   }
 }
-
-extension DateTimeExt on DateTime {
-  Jalali toJalali() {
-    return Jalali.fromDateTime(this);
-  }
-}

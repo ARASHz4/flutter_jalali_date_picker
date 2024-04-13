@@ -19,7 +19,8 @@ This project Based on https://pub.dev/packages/persian_datetime_picker
 
 ```yaml
 dependencies:
-  flutter_jalali_date_picker: ^2.1.0 #latest version
+  flutter_jalali_date_picker: ^2.1.2 #latest version
+  shamsi_date: ^1.0.2
 ```
 
 This sample open DatePicker and return the selected Date
