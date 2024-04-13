@@ -4,7 +4,8 @@ import 'package:intl/intl.dart' as intl;
 import 'package:shamsi_date/shamsi_date.dart';
 
 class StringsText {
-  static String datePickerYear(int yearIndex) => intl.NumberFormat('', 'fa').format(yearIndex);
+  static String datePickerYear(int yearIndex) =>
+      intl.NumberFormat('', 'fa').format(yearIndex);
 
   static String datePickerMonth(int monthIndex) =>
       JalaliDate.months[monthIndex - 1];

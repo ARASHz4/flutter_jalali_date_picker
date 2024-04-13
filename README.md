@@ -19,7 +19,7 @@ This project Based on https://pub.dev/packages/persian_datetime_picker
 
 ```yaml
 dependencies:
-  flutter_jalali_date_picker: ^2.0.0 #latest version
+  flutter_jalali_date_picker: ^2.1.0 #latest version
 ```
 
 This sample open DatePicker and return the selected Date
@@ -40,5 +40,5 @@ final date = DateTime.now();
 
 date.dateToYMMMdPersian();
 date.dateToMMMdPersian();
-date.dateTimeToStringWithDayPersian();
+date.dateToStringWithDayPersian();
 ```

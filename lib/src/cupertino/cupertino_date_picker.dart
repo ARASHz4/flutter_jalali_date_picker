@@ -252,7 +252,7 @@ class PCupertinoDatePicker extends StatelessWidget {
     this.minuteInterval = 1,
     this.use24hFormat = false,
     this.backgroundColor,
-  }) : initialDateTime = initialDateTime ?? Jalali.now(),
+  })  : initialDateTime = initialDateTime ?? Jalali.now(),
         assert(
           minuteInterval > 0 && 60 % minuteInterval == 0,
           'minute interval is not a positive integer factor of 60',
