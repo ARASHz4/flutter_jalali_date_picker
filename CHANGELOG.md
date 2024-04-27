@@ -9,3 +9,6 @@
 
 ## 2.1.2
 - Fix Bugs
+
+## 2.1.3
+- Add Custom Text Color in Cupertino

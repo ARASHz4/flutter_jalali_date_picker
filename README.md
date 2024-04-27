@@ -1,6 +1,6 @@
 # Jalali/Persian Date Picker
 
-[![pub package](https://img.shields.io/pub/v/signalr_socket.svg)](https://pub.dev/packages/flutter_jalali_date_picker)
+[![pub package](https://img.shields.io/pub/v/flutter_jalali_date_picker.svg)](https://pub.dev/packages/flutter_jalali_date_picker)
 
 A Jalali/Persian Date Time Picker with Format Date to Persian for Android, iOS, macOS, Windows, Linux and Web
 
@@ -19,7 +19,7 @@ This project Based on https://pub.dev/packages/persian_datetime_picker
 
 ```yaml
 dependencies:
-  flutter_jalali_date_picker: ^2.1.2 #latest version
+  flutter_jalali_date_picker: ^2.1.3 #latest version
   shamsi_date: ^1.0.2
 ```
 

@@ -65,6 +65,7 @@ class PCupertinoPicker extends StatefulWidget {
     super.key,
     this.diameterRatio = _kDefaultDiameterRatio,
     this.backgroundColor,
+    this.textColor,
     this.offAxisFraction = 0.0,
     this.useMagnifier = false,
     this.magnification = 1.0,
@@ -104,6 +105,7 @@ class PCupertinoPicker extends StatefulWidget {
     super.key,
     this.diameterRatio = _kDefaultDiameterRatio,
     this.backgroundColor,
+    this.textColor,
     this.offAxisFraction = 0.0,
     this.useMagnifier = false,
     this.magnification = 1.0,
@@ -139,6 +141,8 @@ class PCupertinoPicker extends StatefulWidget {
   /// Any alpha value less 255 (fully opaque) will cause the removal of the
   /// wheel list edge fade gradient from rendering of the widget.
   final Color? backgroundColor;
+
+  final Color? textColor;
 
   /// {@macro flutter.rendering.wheelList.offAxisFraction}
   final double? offAxisFraction;
@@ -260,11 +264,11 @@ class _PCupertinoPickerState extends State<PCupertinoPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final Color resolvedBackgroundColor = CupertinoDynamicColor.resolve(
-        widget.backgroundColor ?? Colors.white, context);
+    final Color resolvedBackgroundColor = widget.backgroundColor != null ? CupertinoDynamicColor.resolve(
+        widget.backgroundColor!, context) : Theme.of(context).colorScheme.background;
 
     final Widget result = DefaultTextStyle(
-      style: CupertinoTheme.of(context).textTheme.pickerTextStyle,
+      style: CupertinoTheme.of(context).textTheme.pickerTextStyle.copyWith(color: Colors.red),
       child: Stack(
         children: <Widget>[
           Positioned.fill(

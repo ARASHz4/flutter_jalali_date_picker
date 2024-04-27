@@ -3,6 +3,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_jalali_date_picker/flutter_jalali_date_picker.dart';
 import 'package:flutter_jalali_date_picker/src/cupertino/strings.dart';
@@ -39,9 +40,12 @@ const double _kTimerPickerColumnIntrinsicWidth = 106;
 // for now.
 const double _kTimerPickerNumberLabelFontSize = 23;
 
-TextStyle _themeTextStyle(BuildContext context, {bool isValid = true}) {
+TextStyle _themeTextStyle(BuildContext context, {bool isValid = true, Color? color}) {
+  final textColor = Theme.of(context).colorScheme.onBackground;
+
   final TextStyle style =
-      CupertinoTheme.of(context).textTheme.dateTimePickerTextStyle;
+      CupertinoTheme.of(context).textTheme.dateTimePickerTextStyle.copyWith(color: color ?? textColor);
+
   return isValid
       ? style
       : style.copyWith(
@@ -190,7 +194,7 @@ enum _PickerColumnType {
 ///  * US-English: `| July | 13 | 2012 |`
 ///  * Vietnamese: `| 13 | Tháng 7 | 2012 |`
 ///
-/// Can be used with [showCupertinoModalPopup] to display the picker modally at
+/// Can be used with [showCupertinoModalPopup] to display the picker modal at
 /// the bottom of the screen.
 ///
 /// Sizes itself to its parent and may not render correctly if not given the
@@ -252,6 +256,7 @@ class PCupertinoDatePicker extends StatelessWidget {
     this.minuteInterval = 1,
     this.use24hFormat = false,
     this.backgroundColor,
+    this.textColor,
   })  : initialDateTime = initialDateTime ?? Jalali.now(),
         assert(
           minuteInterval > 0 && 60 % minuteInterval == 0,
@@ -305,6 +310,7 @@ class PCupertinoDatePicker extends StatelessWidget {
       case PCupertinoDatePickerMode.dateAndTime:
         return _CupertinoDatePickerDateTime(
           backgroundColor: backgroundColor,
+          textColor: textColor,
           initialDateTime: initialDateTime,
           maximumDate: maximumDate,
           maximumYear: maximumYear,
@@ -318,6 +324,7 @@ class PCupertinoDatePicker extends StatelessWidget {
       case PCupertinoDatePickerMode.date:
         return _CupertinoDatePickerDate(
           backgroundColor: backgroundColor,
+          textColor: textColor,
           initialDateTime: initialDateTime,
           maximumDate: maximumDate,
           maximumYear: maximumYear,
@@ -400,6 +407,8 @@ class PCupertinoDatePicker extends StatelessWidget {
   ///
   /// Defaults to null, which disables background painting entirely.
   final Color? backgroundColor;
+
+  final Color? textColor;
 
   // @override
   // State<StatefulWidget> createState() {
@@ -579,6 +588,7 @@ class CupertinoTimerPicker extends StatefulWidget {
     this.secondInterval = 1,
     this.alignment = Alignment.center,
     this.backgroundColor,
+    this.textColor,
     required this.onTimerDurationChanged,
   })  : assert(initialTimerDuration >= Duration.zero),
         assert(initialTimerDuration < const Duration(days: 1)),
@@ -613,6 +623,7 @@ class CupertinoTimerPicker extends StatefulWidget {
   ///
   /// Defaults to null, which disables background painting entirely.
   final Color? backgroundColor;
+  final Color? textColor;
 
   @override
   State<StatefulWidget> createState() => _CupertinoTimerPickerState();
@@ -795,6 +806,7 @@ class _CupertinoTimerPickerState extends State<CupertinoTimerPicker> {
       offAxisFraction: -0.5 * textDirectionFactor,
       itemExtent: _kItemExtent,
       backgroundColor: widget.backgroundColor,
+      textColor: widget.textColor,
       squeeze: _kSqueeze,
       onSelectedItemChanged: (int index) {
         setState(() {
@@ -862,6 +874,7 @@ class _CupertinoTimerPickerState extends State<CupertinoTimerPicker> {
       offAxisFraction: offAxisFraction,
       itemExtent: _kItemExtent,
       backgroundColor: widget.backgroundColor,
+      textColor: widget.textColor,
       squeeze: _kSqueeze,
       looping: true,
       onSelectedItemChanged: (int index) {
@@ -923,6 +936,7 @@ class _CupertinoTimerPickerState extends State<CupertinoTimerPicker> {
       offAxisFraction: offAxisFraction,
       itemExtent: _kItemExtent,
       backgroundColor: widget.backgroundColor,
+      textColor: widget.textColor,
       squeeze: _kSqueeze,
       looping: true,
       onSelectedItemChanged: (int index) {
@@ -1041,8 +1055,10 @@ class _CupertinoTimerPickerState extends State<CupertinoTimerPicker> {
       child: Align(
         alignment: widget.alignment,
         child: Container(
-          color:
-              CupertinoDynamicColor.resolve(widget.backgroundColor!, context),
+          color: CupertinoDynamicColor.resolve(
+            widget.backgroundColor ?? Theme.of(context).colorScheme.background,
+            context,
+          ),
           width: totalWidth,
           height: _kPickerHeight,
           child: DefaultTextStyle(
@@ -1069,9 +1085,11 @@ class _CupertinoDatePickerDateTime extends StatefulWidget {
   final bool use24hFormat;
   final ValueChanged<Jalali> onDateTimeChanged;
   final Color? backgroundColor;
+  final Color? textColor;
 
   const _CupertinoDatePickerDateTime({
-    required this.backgroundColor,
+    this.backgroundColor,
+    this.textColor,
     required this.initialDateTime,
     required this.maximumDate,
     required this.maximumYear,
@@ -1334,6 +1352,7 @@ class _CupertinoDatePickerDateTimeState
         useMagnifier: _kUseMagnifier,
         magnification: _kMagnification,
         backgroundColor: widget.backgroundColor,
+        textColor: widget.textColor,
         squeeze: _kSqueeze,
         onSelectedItemChanged: (int index) {
           _onSelectedItemChange(index);
@@ -1364,7 +1383,13 @@ class _CupertinoDatePickerDateTimeState
 
           return itemPositioningBuilder(
             context,
-            Text(dateText, style: _themeTextStyle(context)),
+            Text(
+              dateText,
+              style: _themeTextStyle(
+                context,
+                color: widget.textColor,
+              ),
+            ),
           );
         },
       ),
@@ -1410,6 +1435,7 @@ class _CupertinoDatePickerDateTimeState
         useMagnifier: _kUseMagnifier,
         magnification: _kMagnification,
         backgroundColor: widget.backgroundColor,
+        textColor: widget.textColor,
         squeeze: _kSqueeze,
         onSelectedItemChanged: (int index) {
           final bool regionChanged = meridiemRegion != index ~/ 12;
@@ -1452,8 +1478,11 @@ class _CupertinoDatePickerDateTimeState
                 StringsText.datePickerHour(displayHour),
                 semanticsLabel:
                     StringsText.datePickerHourSemanticsLabel(displayHour),
-                style: _themeTextStyle(context,
-                    isValid: _isValidHour(selectedAmPm, index)),
+                style: _themeTextStyle(
+                  context,
+                  isValid: _isValidHour(selectedAmPm, index),
+                  color: widget.textColor,
+                ),
               ),
             );
           },
@@ -1482,6 +1511,7 @@ class _CupertinoDatePickerDateTimeState
         useMagnifier: _kUseMagnifier,
         magnification: _kMagnification,
         backgroundColor: widget.backgroundColor,
+        textColor: widget.textColor,
         squeeze: _kSqueeze,
         onSelectedItemChanged: _onSelectedItemChange,
         looping: true,
@@ -1507,7 +1537,11 @@ class _CupertinoDatePickerDateTimeState
               StringsText.datePickerMinute(minute),
               semanticsLabel:
                   StringsText.datePickerMinuteSemanticsLabel(minute),
-              style: _themeTextStyle(context, isValid: !isInvalidMinute),
+              style: _themeTextStyle(
+                context,
+                isValid: !isInvalidMinute,
+                color: widget.textColor,
+              ),
             ),
           );
         }),
@@ -1535,6 +1569,7 @@ class _CupertinoDatePickerDateTimeState
         useMagnifier: _kUseMagnifier,
         magnification: _kMagnification,
         backgroundColor: widget.backgroundColor,
+        textColor: widget.textColor,
         squeeze: _kSqueeze,
         onSelectedItemChanged: (int index) {
           selectedAmPm = index;
@@ -1546,10 +1581,12 @@ class _CupertinoDatePickerDateTimeState
             context,
             Text(
               index == 0
-                  ? StringsText.anteMeridiemAbbreviation
-                  : StringsText.postMeridiemAbbreviation,
-              style: _themeTextStyle(context,
-                  isValid: _isValidHour(index, _selectedHourIndex)),
+                  ? StringsText.anteMeridiemAbbreviation : StringsText.postMeridiemAbbreviation,
+              style: _themeTextStyle(
+                context,
+                isValid: _isValidHour(index, _selectedHourIndex),
+                color: widget.textColor,
+              ),
             ),
           );
         }),
@@ -1724,9 +1761,11 @@ class _CupertinoDatePickerDate extends StatefulWidget {
   final bool use24hFormat;
   final ValueChanged<Jalali> onDateTimeChanged;
   final Color? backgroundColor;
+  final Color? textColor;
 
   const _CupertinoDatePickerDate({
-    required this.backgroundColor,
+    this.backgroundColor,
+    this.textColor,
     required this.initialDateTime,
     required this.maximumDate,
     required this.maximumYear,
@@ -1866,6 +1905,7 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePickerDate> {
         useMagnifier: _kUseMagnifier,
         magnification: _kMagnification,
         backgroundColor: widget.backgroundColor,
+        textColor: widget.textColor,
         squeeze: _kSqueeze,
         onSelectedItemChanged: (int index) {
           selectedDay = index + 1;
@@ -1884,8 +1924,11 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePickerDate> {
             context,
             Text(
               StringsText.datePickerDayOfMonth(day),
-              style:
-                  _themeTextStyle(context, isValid: day <= daysInCurrentMonth),
+              style: _themeTextStyle(
+                context,
+                isValid: day <= daysInCurrentMonth,
+                color: widget.textColor,
+              ),
             ),
           );
         }),
@@ -1913,6 +1956,7 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePickerDate> {
         useMagnifier: _kUseMagnifier,
         magnification: _kMagnification,
         backgroundColor: widget.backgroundColor,
+        textColor: widget.textColor,
         squeeze: _kSqueeze,
         onSelectedItemChanged: (int index) {
           selectedMonth = index + 1;
@@ -1937,7 +1981,11 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePickerDate> {
             context,
             Text(
               StringsText.datePickerMonth(month),
-              style: _themeTextStyle(context, isValid: !isInvalidMonth),
+              style: _themeTextStyle(
+                context,
+                isValid: !isInvalidMonth,
+                color: widget.textColor,
+              ),
             ),
           );
         }),
@@ -1965,6 +2013,7 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePickerDate> {
         useMagnifier: _kUseMagnifier,
         magnification: _kMagnification,
         backgroundColor: widget.backgroundColor,
+        textColor: widget.textColor,
         onSelectedItemChanged: (int index) {
           selectedYear = index;
           print(
@@ -1976,7 +2025,9 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePickerDate> {
           }
         },
         itemBuilder: (BuildContext context, int year) {
-          if (year < widget.minimumYear) return const Text('invalid date');
+          if (year < widget.minimumYear) {
+            return const Text('invalid date');
+          }
 
           if (widget.maximumYear != null && year > widget.maximumYear!) {
             return const Text('invalid date');
@@ -1990,7 +2041,11 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePickerDate> {
             context,
             Text(
               StringsText.datePickerYear(year),
-              style: _themeTextStyle(context, isValid: isValidYear),
+              style: _themeTextStyle(
+                context,
+                isValid: isValidYear,
+                color: widget.textColor,
+              ),
             ),
           );
         },
