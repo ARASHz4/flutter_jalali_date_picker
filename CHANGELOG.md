@@ -12,3 +12,6 @@
 
 ## 2.1.3
 - Add Custom Text Color in Cupertino
+
+## 2.1.4
+- Compatibility with Flutter 3.22.0

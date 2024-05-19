@@ -40,11 +40,14 @@ const double _kTimerPickerColumnIntrinsicWidth = 106;
 // for now.
 const double _kTimerPickerNumberLabelFontSize = 23;
 
-TextStyle _themeTextStyle(BuildContext context, {bool isValid = true, Color? color}) {
+TextStyle _themeTextStyle(BuildContext context,
+    {bool isValid = true, Color? color}) {
   final textColor = Theme.of(context).colorScheme.onBackground;
 
-  final TextStyle style =
-      CupertinoTheme.of(context).textTheme.dateTimePickerTextStyle.copyWith(color: color ?? textColor);
+  final TextStyle style = CupertinoTheme.of(context)
+      .textTheme
+      .dateTimePickerTextStyle
+      .copyWith(color: color ?? textColor);
 
   return isValid
       ? style
@@ -1581,7 +1584,8 @@ class _CupertinoDatePickerDateTimeState
             context,
             Text(
               index == 0
-                  ? StringsText.anteMeridiemAbbreviation : StringsText.postMeridiemAbbreviation,
+                  ? StringsText.anteMeridiemAbbreviation
+                  : StringsText.postMeridiemAbbreviation,
               style: _themeTextStyle(
                 context,
                 isValid: _isValidHour(index, _selectedHourIndex),

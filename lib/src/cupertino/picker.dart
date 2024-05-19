@@ -264,11 +264,15 @@ class _PCupertinoPickerState extends State<PCupertinoPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final Color resolvedBackgroundColor = widget.backgroundColor != null ? CupertinoDynamicColor.resolve(
-        widget.backgroundColor!, context) : Theme.of(context).colorScheme.background;
+    final Color resolvedBackgroundColor = widget.backgroundColor != null
+        ? CupertinoDynamicColor.resolve(widget.backgroundColor!, context)
+        : Theme.of(context).colorScheme.background;
 
     final Widget result = DefaultTextStyle(
-      style: CupertinoTheme.of(context).textTheme.pickerTextStyle.copyWith(color: Colors.red),
+      style: CupertinoTheme.of(context)
+          .textTheme
+          .pickerTextStyle
+          .copyWith(color: Colors.red),
       child: Stack(
         children: <Widget>[
           Positioned.fill(
