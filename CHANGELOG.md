@@ -15,3 +15,6 @@
 
 ## 2.1.4
 - Compatibility with Flutter 3.22.0
+
+## 2.2.0
+- Add Date Picker Range Widget

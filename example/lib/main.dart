@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_jalali_date_picker/flutter_jalali_date_picker.dart';
+import 'package:flutter_jalali_date_picker_example/date_picker_range_screen.dart';
 import 'package:flutter_jalali_date_picker_example/date_picker_screen.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
@@ -105,6 +106,32 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: const Text(
               "Date Picker Widget",
+              textAlign: TextAlign.center,
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              final picked = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DatePickerRangeScreen(
+                            initialDateRange: JalaliRange(
+                              start: Jalali(1403, 1, 1),
+                              end: Jalali(1403, 1, 13),
+                            ),
+                            firstDate: Jalali(1385, 8),
+                            lastDate: Jalali(1450, 9),
+                          )));
+
+              if (picked is JalaliRange) {
+                setState(() {
+                  label =
+                      "${picked.start.toDateTime().dateToYMMMdPersian()} تا ${picked.end.toDateTime().dateToYMMMdPersian()}";
+                });
+              }
+            },
+            child: const Text(
+              "Date Picker Range Widget",
               textAlign: TextAlign.center,
             ),
           ),
