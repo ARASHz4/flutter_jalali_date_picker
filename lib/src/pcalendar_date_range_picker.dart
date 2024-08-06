@@ -778,8 +778,10 @@ class _MonthItemState extends State<_MonthItem> {
         textDirection: textDirection,
       );
     } else if (isDisabled) {
-      itemStyle = textTheme.bodyMedium
-          ?.apply(color: colorScheme.onSurface.withOpacity(0.38));
+      itemStyle = textTheme.bodyMedium?.apply(
+          color: dayToBuild.isHoliday()
+              ? Colors.red.withOpacity(0.38)
+              : colorScheme.onSurface.withOpacity(0.38));
     } else if (utils.isSameDay(widget.currentDate, dayToBuild)) {
       // The current day gets a different text color and a circle stroke
       // border.
@@ -788,6 +790,8 @@ class _MonthItemState extends State<_MonthItem> {
         border: Border.all(color: colorScheme.primary, width: 1),
         shape: BoxShape.circle,
       );
+    } else if (dayToBuild.isHoliday()) {
+      itemStyle = textTheme.bodyMedium?.apply(color: Colors.red);
     }
 
     // We want the day of month to be spoken first irrespective of the
@@ -920,6 +924,7 @@ class _MonthItemState extends State<_MonthItem> {
         MediaQuery.of(context).orientation == Orientation.landscape
             ? _maxCalendarWidthLandscape
             : _maxCalendarWidthPortrait;
+
     return Column(
       children: <Widget>[
         Container(

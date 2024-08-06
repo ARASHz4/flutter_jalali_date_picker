@@ -173,7 +173,7 @@ class _CalendarDatePickerState extends State<PCalendarDatePicker> {
       _mode = mode;
       if (_mode == PDatePickerMode.day) {
         SemanticsService.announce(
-          formatMonthYear(_selectedDate!),
+          _selectedDate!.formatMonthYear(),
           _textDirection,
         );
       } else {
@@ -265,7 +265,7 @@ class _CalendarDatePickerState extends State<PCalendarDatePicker> {
         // Put the mode toggle button on top so that it won't be covered up by the _MonthPicker
         _DatePickerModeToggleButton(
           mode: _mode,
-          title: formatMonthYear(_currentDisplayedMonthDate!),
+          title: _currentDisplayedMonthDate!.formatMonthYear(),
           onTitlePressed: () {
             // Toggle the day/year mode.
             _handleModeChanged(_mode == PDatePickerMode.day
@@ -346,7 +346,6 @@ class _DatePickerModeToggleButtonState
         children: <Widget>[
           Flexible(
             child: Semantics(
-              // TODO(darrenaustin): localize 'Select year'
               label: 'Select year',
               excludeSemantics: true,
               button: true,
@@ -492,7 +491,7 @@ class _MonthPickerState extends State<_MonthPicker> {
   void _handleNextMonth() {
     if (!_isDisplayingLastMonth) {
       SemanticsService.announce(
-        formatMonthYear(_nextMonthDate),
+        _nextMonthDate.formatMonthYear(),
         _textDirection,
       );
       _pageController!.nextPage(
@@ -505,7 +504,7 @@ class _MonthPickerState extends State<_MonthPicker> {
   void _handlePreviousMonth() {
     if (!_isDisplayingFirstMonth) {
       SemanticsService.announce(
-        formatMonthYear(_previousMonthDate),
+        _previousMonthDate.formatMonthYear(),
         _textDirection,
       );
       _pageController!.previousPage(
@@ -648,6 +647,8 @@ class _DayPicker extends StatelessWidget {
     final Color selectedDayColor = colorScheme.onPrimary;
     final Color selectedDayBackground = colorScheme.primary;
     final Color todayColor = colorScheme.primary;
+    const Color holidayColor = Colors.red;
+    final Color disabledHolidayColor = Colors.red.withOpacity(0.38);
 
     final int year = displayedMonth.year;
     final int month = displayedMonth.month;
@@ -681,6 +682,8 @@ class _DayPicker extends StatelessWidget {
             color: selectedDayBackground,
             shape: BoxShape.circle,
           );
+        } else if (isDisabled && dayToBuild.isHoliday()) {
+          dayColor = disabledHolidayColor;
         } else if (isDisabled) {
           dayColor = disabledDayColor;
         } else if (utils.isSameDay(currentDate, dayToBuild)) {
@@ -692,7 +695,7 @@ class _DayPicker extends StatelessWidget {
             shape: BoxShape.circle,
           );
         } else if (dayToBuild.isHoliday()) {
-          dayColor = Colors.red;
+          dayColor = holidayColor;
         }
 
         Widget dayWidget = Container(

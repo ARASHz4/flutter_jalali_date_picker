@@ -6,13 +6,13 @@ class DatePickerScreen extends StatelessWidget {
   DatePickerScreen({
     super.key,
     required this.initialDate,
-    required this.firstDate,
-    required this.lastDate,
+    this.firstDate,
+    this.lastDate,
   });
 
   final Jalali initialDate;
-  final Jalali firstDate;
-  final Jalali lastDate;
+  final Jalali? firstDate;
+  final Jalali? lastDate;
 
   Jalali? selectedDate;
 
@@ -26,8 +26,8 @@ class DatePickerScreen extends StatelessWidget {
             textDirection: TextDirection.rtl,
             child: PCalendarDatePicker(
               initialDate: initialDate,
-              firstDate: firstDate,
-              lastDate: lastDate,
+              firstDate: firstDate ?? Jalali.min,
+              lastDate: lastDate ?? Jalali.max,
               onDateChanged: (value) {
                 selectedDate = value;
               },

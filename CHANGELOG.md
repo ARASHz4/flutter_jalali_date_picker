@@ -18,3 +18,6 @@
 
 ## 2.2.0
 - Add Date Picker Range Widget
+
+## 2.2.2
+- Add Holly Days in Date Picker Range

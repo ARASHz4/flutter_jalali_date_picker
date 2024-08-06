@@ -197,12 +197,6 @@ String formatYear(Jalali date) {
   return formatter.yy;
 }
 
-String formatMonthYear(Jalali date) {
-  final formatter = PersianDateFormatter(date);
-
-  return '${formatter.mN} ${formatter.yyyy}';
-}
-
 String formatFullDate(Jalali date) {
   final formatter = PersianDateFormatter(date);
 
@@ -346,7 +340,7 @@ extension JalaliExt on Jalali {
 
   String formatMonthYear() {
     final formatter = PersianDateFormatter(this);
-    return '${formatter.yyyy}/${formatter.mm}';
+    return '${formatter.mN} ${formatter.yyyy}';
   }
 
   String formatShortMonthDay() {

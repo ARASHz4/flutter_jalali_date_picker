@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('دیت تایم پیکر فارسی'),
+        title: const Text('دیت تایم پیکر خورشیدی'),
       ),
       body: GridView.count(
         padding: const EdgeInsets.all(8),
@@ -54,14 +54,15 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisCount: 2,
         childAspectRatio: (itemWidth / itemHeight),
         children: [
+          ///Date Picker
           TextButton(
             onPressed: () async {
               final picked = await showJalaliDatePicker(
                 context,
                 initialDate:
                     Jalali.fromDateTime(selectedDate ?? DateTime.now()),
-                firstDate: Jalali(1385, 8),
-                lastDate: Jalali(1450, 9),
+                firstDate: Jalali.min,
+                lastDate: Jalali.max,
                 popOnSelectDate: false,
               );
 
@@ -81,6 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///Date Picker Widget
           TextButton(
             onPressed: () async {
               final picked = await Navigator.push(
@@ -89,8 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context) => DatePickerScreen(
                             initialDate: Jalali.fromDateTime(
                                 selectedDate ?? DateTime.now()),
-                            firstDate: Jalali(1385, 8),
-                            lastDate: Jalali(1450, 9),
+                            lastDate: Jalali.now(),
                           )));
 
               if (picked is Jalali) {
@@ -109,6 +111,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///Date Picker Range Widget
           TextButton(
             onPressed: () async {
               final picked = await Navigator.push(
@@ -119,8 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               start: Jalali(1403, 1, 1),
                               end: Jalali(1403, 1, 13),
                             ),
-                            firstDate: Jalali(1385, 8),
-                            lastDate: Jalali(1450, 9),
+                            lastDate: Jalali.now(),
                           )));
 
               if (picked is JalaliRange) {
@@ -135,6 +138,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///Date Picker Cupertino
           TextButton(
             onPressed: () async {
               final picked = await showModalBottomSheet<Jalali>(
@@ -200,6 +205,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///Time Picker Input Mode
           TextButton(
             onPressed: () async {
               final picked = await showJalaliTimePicker(
@@ -229,6 +236,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///Date & Time Picker Cupertino
           TextButton(
             onPressed: () async {
               final picked = await showModalBottomSheet<Jalali>(
@@ -295,6 +304,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///Time Picker Cupertino
           TextButton(
             onPressed: () async {
               Jalali? picked = await showModalBottomSheet<Jalali>(
@@ -357,6 +368,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///Range Date Picker
           TextButton(
             onPressed: () async {
               final picked = await showJalaliDateRangePicker(
@@ -365,8 +378,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   start: Jalali(1403, 1, 1),
                   end: Jalali(1403, 1, 13),
                 ),
-                firstDate: Jalali(1385, 8),
-                lastDate: Jalali(1450, 9),
+                firstDate: Jalali.min,
+                lastDate: Jalali.max,
               );
 
               if (picked != null) {
@@ -381,6 +394,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///Time Picker
           TextButton(
             onPressed: () async {
               var picked = await showJalaliTimePicker(
@@ -405,6 +420,8 @@ class _HomeScreenState extends State<HomeScreen> {
               textAlign: TextAlign.center,
             ),
           ),
+
+          ///Range Date Picker Input Mode
           TextButton(
             onPressed: () async {
               var picked = await showJalaliDateRangePicker(
@@ -414,8 +431,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   start: Jalali(1403, 1, 1),
                   end: Jalali(1403, 1, 13),
                 ),
-                firstDate: Jalali(1385, 8),
-                lastDate: Jalali(1450, 9),
+                firstDate: Jalali.min,
+                lastDate: Jalali.max,
               );
 
               if (picked != null) {

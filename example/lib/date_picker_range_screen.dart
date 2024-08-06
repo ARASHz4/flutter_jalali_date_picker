@@ -6,16 +6,16 @@ class DatePickerRangeScreen extends StatelessWidget {
   DatePickerRangeScreen({
     super.key,
     required this.initialDateRange,
-    required this.firstDate,
-    required this.lastDate,
+    this.firstDate,
+    this.lastDate,
   }) {
     selectedStartDate = initialDateRange.start;
     selectedEndDate = initialDateRange.end;
   }
 
   final JalaliRange initialDateRange;
-  final Jalali firstDate;
-  final Jalali lastDate;
+  final Jalali? firstDate;
+  final Jalali? lastDate;
 
   Jalali? selectedStartDate;
   Jalali? selectedEndDate;
@@ -27,17 +27,20 @@ class DatePickerRangeScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: PCalendarDateRangePicker(
-              initialStartDate: initialDateRange.start,
-              initialEndDate: initialDateRange.end,
-              firstDate: firstDate,
-              lastDate: lastDate,
-              onStartDateChanged: (date) {
-                selectedStartDate = date;
-              },
-              onEndDateChanged: (date) {
-                selectedEndDate = date;
-              },
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: PCalendarDateRangePicker(
+                initialStartDate: initialDateRange.start,
+                initialEndDate: initialDateRange.end,
+                firstDate: firstDate ?? Jalali.min,
+                lastDate: lastDate ?? Jalali.max,
+                onStartDateChanged: (date) {
+                  selectedStartDate = date;
+                },
+                onEndDateChanged: (date) {
+                  selectedEndDate = date;
+                },
+              ),
             ),
           ),
           Padding(
