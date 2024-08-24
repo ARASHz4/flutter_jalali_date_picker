@@ -21,3 +21,6 @@
 
 ## 2.2.2
 - Add Holly Days in Date Picker Range
+
+## 2.2.3
+- Fix Bugs
