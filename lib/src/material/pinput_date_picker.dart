@@ -159,10 +159,8 @@ class _InputDatePickerFormFieldState extends State<PInputDatePickerFormField> {
   String? _validateDate(String? text) {
     final Jalali? date = _parseDate(text!);
     if (date == null) {
-      // TODO(darrenaustin): localize 'Invalid format.'
       return widget.errorFormatText ?? 'Invalid format.';
     } else if (!_isValidAcceptableDate(date)) {
-      // TODO(darrenaustin): localize 'Out of range.'
       return widget.errorInvalidText ?? 'Out of range.';
     }
 
@@ -207,15 +205,10 @@ class _InputDatePickerFormFieldState extends State<PInputDatePickerFormField> {
                 decoration: InputDecoration(
                   border: const UnderlineInputBorder(),
                   filled: true,
-                  // TODO(darrenaustin): localize 'mm/dd/yyyy' and 'Enter Date'
                   hintText: widget.fieldHintText ?? 'mm/dd/yyyy',
                   labelText: widget.fieldLabelText ?? 'Enter Date',
                 ),
                 validator: _validateDate,
-                // inputFormatters: <TextInputFormatter>[
-                //   // TODO(darrenaustin): localize date separator '/'
-                //   _DateTextInputFormatter('/'),
-                // ],
                 keyboardType: TextInputType.text,
                 onSaved: _handleSaved,
                 onFieldSubmitted: _handleSubmitted,

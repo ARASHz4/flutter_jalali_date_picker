@@ -1,12 +1,5 @@
-// Copyright 2014 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'dart:math' as math;
-
 import 'package:shamsi_date/shamsi_date.dart';
-
-import './pdate_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -147,7 +140,7 @@ class _CalendarDatePickerState extends State<PCalendarDatePicker> {
     if (!_announcedInitialDate) {
       _announcedInitialDate = true;
       SemanticsService.announce(
-        formatFullDate(_selectedDate!),
+        utils.formatFullDate(_selectedDate!),
         _textDirection,
       );
     }
@@ -178,7 +171,7 @@ class _CalendarDatePickerState extends State<PCalendarDatePicker> {
         );
       } else {
         SemanticsService.announce(
-          formatYear(_selectedDate!),
+          utils.formatYear(_selectedDate!),
           _textDirection,
         );
       }
@@ -337,7 +330,7 @@ class _DatePickerModeToggleButtonState
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final Color controlColor = colorScheme.onSurface.withOpacity(0.60);
+    final Color controlColor = colorScheme.onSurface.withAlpha(154);
 
     return Container(
       padding: const EdgeInsetsDirectional.only(start: 16, end: 4),
@@ -549,7 +542,7 @@ class _MonthPickerState extends State<_MonthPicker> {
     final String nextTooltipText =
         'ماه بعد ${_nextMonthDate.formatMonthYear()}';
     final Color controlColor =
-        Theme.of(context).colorScheme.onSurface.withOpacity(0.60);
+        Theme.of(context).colorScheme.onSurface.withAlpha(154);
 
     return Semantics(
       child: Column(
@@ -642,13 +635,13 @@ class _DayPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color enabledDayColor = colorScheme.onSurface.withOpacity(0.87);
-    final Color disabledDayColor = colorScheme.onSurface.withOpacity(0.38);
+    final Color enabledDayColor = colorScheme.onSurface.withAlpha(222);
+    final Color disabledDayColor = colorScheme.onSurface.withAlpha(98);
     final Color selectedDayColor = colorScheme.onPrimary;
     final Color selectedDayBackground = colorScheme.primary;
     final Color todayColor = colorScheme.primary;
     const Color holidayColor = Colors.red;
-    final Color disabledHolidayColor = Colors.red.withOpacity(0.38);
+    final Color disabledHolidayColor = Colors.red.withAlpha(98);
 
     final int year = displayedMonth.year;
     final int month = displayedMonth.month;
@@ -723,7 +716,7 @@ class _DayPicker extends StatelessWidget {
               // day of month before the rest of the date, as they are looking
               // for the day of month. To do that we prepend day of month to the
               // formatted full date.
-              label: '${formatDecimal(day)}, ${dayToBuild.formatFullDate}',
+              label: '${utils.formatDecimal(day)}, ${dayToBuild.formatFullDate}',
               selected: isSelectedDay,
               excludeSemantics: true,
               child: dayWidget,
@@ -756,7 +749,7 @@ class _DayPickerGridDelegate extends SliverGridDelegate {
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
-    const int columnCount = JalaliDate.daysPerWeek;
+    const int columnCount = utils.JalaliDate.daysPerWeek;
     final double tileWidth = constraints.crossAxisExtent / columnCount;
     final double tileHeight = math.min(_dayPickerRowHeight,
         constraints.viewportMainAxisExtent / _maxDayPickerRowCount);
@@ -800,7 +793,7 @@ class _DayHeaders extends StatelessWidget {
     final List<Widget> result = <Widget>[];
     int firstDayOfWeekIndex = 0;
     for (int i = firstDayOfWeekIndex; true; i = (i + 1) % 7) {
-      final String weekday = narrowWeekdays[i];
+      final String weekday = utils.narrowWeekdays[i];
       result.add(ExcludeSemantics(
         child: Center(child: Text(weekday, style: headerStyle)),
       ));
@@ -814,7 +807,7 @@ class _DayHeaders extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final TextStyle? dayHeaderStyle = theme.textTheme.bodySmall?.apply(
-      color: colorScheme.onSurface.withOpacity(0.60),
+      color: colorScheme.onSurface.withAlpha(154),
     );
     final MaterialLocalizations localizations =
         MaterialLocalizations.of(context);
@@ -917,11 +910,11 @@ class _YearPickerState extends State<_YearPicker> {
     if (isSelected) {
       textColor = colorScheme.onPrimary;
     } else if (isDisabled) {
-      textColor = colorScheme.onSurface.withOpacity(0.38);
+      textColor = colorScheme.onSurface.withAlpha(98);
     } else if (isCurrentYear) {
       textColor = colorScheme.primary;
     } else {
-      textColor = colorScheme.onSurface.withOpacity(0.87);
+      textColor = colorScheme.onSurface.withAlpha(222);
     }
     final TextStyle? itemStyle = textTheme.bodyLarge?.apply(color: textColor);
 

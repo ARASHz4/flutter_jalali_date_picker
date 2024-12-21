@@ -385,7 +385,7 @@ class _DateRangePickerDialogState extends State<_DateRangePickerDialog> {
           cancelText: widget.cancelText ?? 'لغو',
           helpText: widget.helpText ?? 'انتخاب تاریخ',
         );
-        final DialogTheme dialogTheme = Theme.of(context).dialogTheme;
+        final dialogTheme = Theme.of(context).dialogTheme;
         size = orientation == Orientation.portrait
             ? _inputPortraitDialogSize
             : _inputLandscapeDialogSize;
@@ -464,8 +464,7 @@ class _CalendarRangePickerDialog extends StatelessWidget {
     final Color onPrimarySurfaceColor =
         isDark ? colorScheme.onSurface : colorScheme.onPrimary;
 
-    final Color headerDisabledForeground =
-        onPrimarySurfaceColor.withOpacity(0.38);
+    final Color headerDisabledForeground = onPrimarySurfaceColor.withAlpha(98);
     final String startDateText = utils.formatRangeStartDate(
         localizations, selectedStartDate, selectedEndDate);
     final String endDateText = utils.formatRangeEndDate(

@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:shamsi_date/shamsi_date.dart';
-
 import 'pdate_utils.dart' as utils;
-import 'pdate_utils.dart';
 
 const Duration _monthScrollDuration = Duration(milliseconds: 200);
 
@@ -330,9 +328,9 @@ class _CalendarKeyboardNavigatorState
 
   static const Map<TraversalDirection, int> _directionOffset =
       <TraversalDirection, int>{
-    TraversalDirection.up: -JalaliDate.daysPerWeek,
+    TraversalDirection.up: -utils.JalaliDate.daysPerWeek,
     TraversalDirection.right: 1,
-    TraversalDirection.down: JalaliDate.daysPerWeek,
+    TraversalDirection.down: utils.JalaliDate.daysPerWeek,
     TraversalDirection.left: -1,
   };
 
@@ -426,7 +424,7 @@ class _DayHeaders extends StatelessWidget {
     final List<Widget> result = <Widget>[];
     int firstDayOfWeekIndex = 0;
     for (int i = firstDayOfWeekIndex; true; i = (i + 1) % 7) {
-      final String weekday = narrowWeekdays[i];
+      final String weekday = utils.narrowWeekdays[i];
       result.add(ExcludeSemantics(
         child: Center(child: Text(weekday, style: headerStyle)),
       ));
@@ -475,9 +473,9 @@ class _MonthItemGridDelegate extends SliverGridDelegate {
   SliverGridLayout getLayout(SliverConstraints constraints) {
     final double tileWidth =
         (constraints.crossAxisExtent - 2 * _horizontalPadding) /
-            JalaliDate.daysPerWeek;
+            utils.JalaliDate.daysPerWeek;
     return _MonthSliverGridLayout(
-      crossAxisCount: JalaliDate.daysPerWeek + 2,
+      crossAxisCount: utils.JalaliDate.daysPerWeek + 2,
       dayChildWidth: tileWidth,
       edgeChildWidth: _horizontalPadding,
       reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
@@ -692,7 +690,7 @@ class _MonthItemState extends State<_MonthItem> {
   }
 
   Color _highlightColor(BuildContext context) {
-    return Theme.of(context).colorScheme.primary.withOpacity(0.12);
+    return Theme.of(context).colorScheme.primary.withAlpha(30);
   }
 
   void _dayFocusChanged(bool focused) {
@@ -780,8 +778,8 @@ class _MonthItemState extends State<_MonthItem> {
     } else if (isDisabled) {
       itemStyle = textTheme.bodyMedium?.apply(
           color: dayToBuild.isHoliday()
-              ? Colors.red.withOpacity(0.38)
-              : colorScheme.onSurface.withOpacity(0.38));
+              ? Colors.red.withAlpha(98)
+              : colorScheme.onSurface.withAlpha(98));
     } else if (utils.isSameDay(widget.currentDate, dayToBuild)) {
       // The current day gets a different text color and a circle stroke
       // border.
@@ -817,7 +815,7 @@ class _MonthItemState extends State<_MonthItem> {
           label: semanticLabel,
           selected: isSelectedDayStart || isSelectedDayEnd,
           child: ExcludeSemantics(
-            child: Text(formatDecimal(day), style: itemStyle),
+            child: Text(utils.formatDecimal(day), style: itemStyle),
           ),
         ),
       ),
@@ -835,7 +833,7 @@ class _MonthItemState extends State<_MonthItem> {
         focusNode: _dayFocusNodes[day - 1],
         onTap: () => widget.onChanged(dayToBuild),
         radius: _monthItemRowHeight / 2 + 4,
-        splashColor: colorScheme.primary.withOpacity(0.38),
+        splashColor: colorScheme.primary.withAlpha(98),
         onFocusChange: _dayFocusChanged,
         child: dayWidget,
       );
@@ -857,7 +855,7 @@ class _MonthItemState extends State<_MonthItem> {
     final int daysInMonth = utils.getDaysInMonth(year, month);
     final int dayOffset = utils.firstDayOffset(year, month);
     final int weeks =
-        ((daysInMonth + dayOffset) / JalaliDate.daysPerWeek).ceil();
+        ((daysInMonth + dayOffset) / utils.JalaliDate.daysPerWeek).ceil();
     final double gridHeight =
         weeks * _monthItemRowHeight + (weeks - 1) * _monthItemSpaceBetweenRows;
     final List<Widget> dayItems = <Widget>[];
@@ -885,9 +883,9 @@ class _MonthItemState extends State<_MonthItem> {
     // correctly extend the range highlight.
     final List<Widget> paddedDayItems = <Widget>[];
     for (int i = 0; i < weeks; i++) {
-      final int start = i * JalaliDate.daysPerWeek;
+      final int start = i * utils.JalaliDate.daysPerWeek;
       final int end = math.min(
-        start + JalaliDate.daysPerWeek,
+        start + utils.JalaliDate.daysPerWeek,
         dayItems.length,
       );
       final List<Widget> weekList = dayItems.sublist(start, end);
@@ -905,7 +903,7 @@ class _MonthItemState extends State<_MonthItem> {
       // partial week.
       if (end < dayItems.length ||
           (end == dayItems.length &&
-              dayItems.length % JalaliDate.daysPerWeek == 0)) {
+              dayItems.length % utils.JalaliDate.daysPerWeek == 0)) {
         final Jalali dateBeforeTrailingPadding =
             Jalali(year, month, end - dayOffset);
         // Only color the edge container if it is on/after the start date and

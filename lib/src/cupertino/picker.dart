@@ -266,7 +266,7 @@ class _PCupertinoPickerState extends State<PCupertinoPicker> {
   Widget build(BuildContext context) {
     final Color resolvedBackgroundColor = widget.backgroundColor != null
         ? CupertinoDynamicColor.resolve(widget.backgroundColor!, context)
-        : Theme.of(context).colorScheme.background;
+        : Theme.of(context).colorScheme.surface;
 
     final Widget result = DefaultTextStyle(
       style: CupertinoTheme.of(context)

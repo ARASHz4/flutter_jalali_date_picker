@@ -24,3 +24,6 @@
 
 ## 2.2.3
 - Fix Bugs
+
+## 2.2.4
+- Computability with Flutter 3.27.0

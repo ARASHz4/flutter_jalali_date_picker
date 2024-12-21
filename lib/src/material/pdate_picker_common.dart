@@ -1,4 +1,3 @@
-import 'dart:ui' show hashValues;
 import 'package:shamsi_date/shamsi_date.dart';
 
 /// Mode of the date picker dialog.
@@ -74,15 +73,6 @@ class JalaliRange {
   ///
   /// See [Jalali.difference] for more details.
   Duration get duration => end.toDateTime().difference(start.toDateTime());
-
-  @override
-  bool operator ==(Object other) {
-    if (other.runtimeType != runtimeType) return false;
-    return other is JalaliRange && other.start == start && other.end == end;
-  }
-
-  @override
-  int get hashCode => hashValues(start, end);
 
   @override
   String toString() => '$start - $end';

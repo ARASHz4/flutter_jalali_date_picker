@@ -1,6 +1,6 @@
 name: flutter_jalali_date_picker
 description: "A Jalali/Persian Date Time Picker with Format Date to Persian"
-version: 2.2.3
+version: 2.2.4
 homepage: "https://github.com/ARASHz4/flutter_jalali_date_picker"
 
 environment:

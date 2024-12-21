@@ -42,7 +42,7 @@ const double _kTimerPickerNumberLabelFontSize = 23;
 
 TextStyle _themeTextStyle(BuildContext context,
     {bool isValid = true, Color? color}) {
-  final textColor = Theme.of(context).colorScheme.onBackground;
+  final textColor = Theme.of(context).colorScheme.onSurface;
 
   final TextStyle style = CupertinoTheme.of(context)
       .textTheme
@@ -1059,7 +1059,7 @@ class _CupertinoTimerPickerState extends State<CupertinoTimerPicker> {
         alignment: widget.alignment,
         child: Container(
           color: CupertinoDynamicColor.resolve(
-            widget.backgroundColor ?? Theme.of(context).colorScheme.background,
+            widget.backgroundColor ?? Theme.of(context).colorScheme.surface,
             context,
           ),
           width: totalWidth,
@@ -1067,9 +1067,10 @@ class _CupertinoTimerPickerState extends State<CupertinoTimerPicker> {
           child: DefaultTextStyle(
             style: _textStyleFrom(context),
             child: Row(
-                children: columns
-                    .map((Widget child) => Expanded(child: child))
-                    .toList(growable: false)),
+              children: columns.map((child) {
+                return Expanded(child: child);
+              }).toList(growable: false),
+            ),
           ),
         ),
       ),
@@ -2177,8 +2178,6 @@ class _CupertinoDatePickerDateState extends State<_CupertinoDatePickerDate> {
           estimatedColumnWidths[_PickerColumnType.month.index]
         ];
         break;
-      default:
-        assert(false, 'date order is not specified');
     }
 
     final List<Widget> pickers = <Widget>[];

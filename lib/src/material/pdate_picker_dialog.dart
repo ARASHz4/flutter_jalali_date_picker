@@ -236,7 +236,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
 
   void _handleOk() {
     if (_entryMode == PDatePickerEntryMode.input ||
-        _entryMode == DatePickerEntryMode.inputOnly) {
+        _entryMode == PDatePickerEntryMode.inputOnly) {
       final FormState form = _formKey.currentState!;
       if (!form.validate()) {
         setState(() => _autoValidate = true);
@@ -323,19 +323,22 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
         ? textTheme.titleMedium?.copyWith(color: dateColor)
         : textTheme.headlineSmall?.copyWith(color: dateColor);
 
-    final Widget actions = ButtonBar(
-      buttonTextTheme: ButtonTextTheme.primary,
-      layoutBehavior: ButtonBarLayoutBehavior.constrained,
-      children: <Widget>[
-        TextButton(
-          onPressed: _handleCancel,
-          child: Text(widget.cancelText ?? 'لغو'),
-        ),
-        TextButton(
-          onPressed: _handleOk,
-          child: Text(widget.confirmText ?? 'تایید'),
-        ),
-      ],
+    final Widget actions = Container(
+      padding: const EdgeInsets.all(8),
+      alignment: AlignmentDirectional.bottomEnd,
+      child: OverflowBar(
+        spacing: 8,
+        children: <Widget>[
+          TextButton(
+            onPressed: _handleCancel,
+            child: Text(widget.cancelText ?? 'لغو'),
+          ),
+          TextButton(
+            onPressed: _handleOk,
+            child: Text(widget.confirmText ?? 'تایید'),
+          ),
+        ],
+      ),
     );
 
     PCalendarDatePicker pCalendarDatePicker() {
@@ -373,13 +376,11 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       case PDatePickerEntryMode.calendar:
         picker = pCalendarDatePicker();
         entryModeIcon = Icons.edit;
-        // TODO(darrenaustin): localize 'Switch to input'
         entryModeTooltip = 'Switch to input';
         break;
 
       case PDatePickerEntryMode.calendarOnly:
         picker = pCalendarDatePicker();
-        // TODO(darrenaustin): localize 'Switch to calendarOnly'
         entryModeIcon = null;
         entryModeTooltip = null;
         break;
@@ -393,7 +394,6 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
           child: pInputDatePickerFormField(),
         );
         entryModeIcon = Icons.calendar_today;
-        // TODO(darrenaustin): localize 'Switch to calendar'
         entryModeTooltip = 'Switch to calendar';
         break;
 
@@ -405,14 +405,12 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
               : AutovalidateMode.disabled,
           child: pInputDatePickerFormField(),
         );
-        // TODO(darrenaustin): localize 'Switch to calendar'
         break;
       default:
         break;
     }
 
     final Widget header = PDatePickerHeader(
-      // TODO(darrenaustin): localize 'SELECT DATE'
       helpText: widget.helpText ?? 'انتخاب تاریخ',
       titleText: dateText,
       titleStyle: dateStyle,
@@ -424,7 +422,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     );
 
     final Size dialogSize = _dialogSize(context)!;
-    final DialogTheme dialogTheme = Theme.of(context).dialogTheme;
+    final dialogTheme = Theme.of(context).dialogTheme;
     return Dialog(
       insetPadding:
           const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
