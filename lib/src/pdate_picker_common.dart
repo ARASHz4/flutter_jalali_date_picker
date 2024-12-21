@@ -81,8 +81,8 @@ class JalaliRange {
     return other is JalaliRange && other.start == start && other.end == end;
   }
 
-  @override
-  int get hashCode => hashValues(start, end);
+  // @override
+  // int get hashCode => hashValues(start, end);
 
   @override
   String toString() => '$start - $end';
