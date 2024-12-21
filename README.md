@@ -19,7 +19,7 @@ This project Based on https://pub.dev/packages/persian_datetime_picker
 
 ```yaml
 dependencies:
-  flutter_jalali_date_picker: ^2.2.3 #latest version
+  flutter_jalali_date_picker: ^2.2.4 #latest version
   shamsi_date: ^1.0.4
 ```
 
