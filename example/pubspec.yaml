@@ -13,13 +13,13 @@ dependencies:
 
   flutter_jalali_date_picker:
     path: ../
-  shamsi_date: ^1.0.4
+  shamsi_date: ^1.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^4.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
 
