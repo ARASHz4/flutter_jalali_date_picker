@@ -27,3 +27,6 @@
 
 ## 2.2.4
 - Computability with Flutter 3.27.0
+
+## 2.2.5
+- Computability with Flutter 3.35.0. Thanks to [AfshinNajafi74](https://github.com/ARASHz4/flutter_jalali_date_picker/pull/3)
